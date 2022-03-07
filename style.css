@@ -126,3 +126,12 @@ button {
 
   font-size: 1rem;
 }
+
+
+.goodData{
+  outline: 4px solid green;
+}
+
+.error{
+  outline: 4px solid red;
+}

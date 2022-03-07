@@ -39,6 +39,9 @@ const newMemberImageInput = document.querySelector('#image');
 const addMemberButton = document.querySelector('#addMemberButton');
 
 appendTeamCards();
+newMemberNameInput.addEventListener('input', dataCheck);
+newMemberRoleInput.addEventListener('input', dataCheck);
+newMemberImageInput.addEventListener('input', dataCheck);
 addMemberButton.addEventListener('click', addMember);
 
 function appendTeamCards(){
@@ -71,19 +74,21 @@ function appendTeamCards(){
 }
 
 function addMember(){
-    //creo un nuovo oggetto che conterrà le informazioni del nuovo membro
-    const newMember = {};
-
-    //assegno i valori degli input alle proprietà del nuovo oggetto
-    newMember.name = newMemberNameInput.value;
-    newMember.role = newMemberRoleInput.value;
-    newMember.imageUrl = newMemberImageInput.value;
-
-    //inserisco il nuovo oggetto in coda all'array gia esistente
-    ourTeam.push(newMember);
-
+    if (newMemberNameInput.value.trim() !== '' && newMemberRoleInput.value.trim() !== '' && newMemberImageInput.value.trim() !== ''){
+        //creo un nuovo oggetto che conterrà le informazioni del nuovo membro
+        const newMember = {};
     
-    appendTeamCard();
+        //assegno i valori degli input alle proprietà del nuovo oggetto
+        newMember.name = newMemberNameInput.value;
+        newMember.role = newMemberRoleInput.value;
+        newMember.imageUrl = newMemberImageInput.value;
+    
+        //inserisco il nuovo oggetto in coda all'array gia esistente
+        ourTeam.push(newMember);
+    
+        
+        appendTeamCard();
+    }
 }
 
 function appendTeamCard(){
@@ -110,4 +115,38 @@ function appendTeamCard(){
     teamCard.append(cardImageContainer, cardText);
 
     teamContainer.append(teamCard);
+}
+
+function dataCheck(){
+
+    let query;
+    let existent = false;
+
+    switch (this){
+        case newMemberNameInput:
+            query ='name';
+            break;
+        case newMemberRoleInput:
+            query = 'role';
+            break;
+        case newMemberImageInput:
+            query = 'imgUrl';
+            break;
+    }
+
+    for (let i = 0; i < ourTeam.length; i++){
+        if (ourTeam[i][query].toLowerCase() == this.value.toLowerCase()){
+            existent = true;
+        }
+    }
+
+    if (existent && this.value.length){
+        this.classList.remove('goodData');
+        this.classList.add('error');
+    } else if (!existent && this.value.length){
+        this.classList.remove('error');
+        this.classList.add('goodData');
+    } else {
+        this.classList.remove('error', 'goodData');
+    }
 }
