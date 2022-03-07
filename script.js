@@ -1,30 +1,30 @@
 const ourTeam = [
-    member1 = {
+    {
         name : 'Wayne Bennet',
         role : 'Founder & CEO',
         imageUrl : 'img/wayne-barnett-founder-ceo.jpg' 
     },
-    member2 = {
+    {
         name : 'Angela Caroll',
         role : 'Chief Editor',
         imageUrl : 'img/angela-caroll-chief-editor.jpg' 
     },
-    member3 = {
+    {
         name : 'Walter Gordon',
         role : 'Office Manager',
         imageUrl : 'img/walter-gordon-office-manager.jpg' 
     },
-    member4 = {
+    {
         name : 'Angela Lopez',
         role : 'Social Media Manager',
         imageUrl : 'img/angela-lopez-social-media-manager.jpg' 
     },
-    member5 = {
+    {
         name : 'Scott Estrada',
         role : 'Developer',
         imageUrl : 'img/scott-estrada-developer.jpg' 
     },
-    member6 = {
+    {
         name : 'Barbara Ramos',
         role : 'Graphic Designer',
         imageUrl : 'img/barbara-ramos-graphic-designer.jpg' 
