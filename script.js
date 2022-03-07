@@ -36,13 +36,17 @@ const teamContainer = document.querySelector('.team-container');
 const newMemberNameInput = document.querySelector('#name');
 const newMemberRoleInput = document.querySelector('#role');
 const newMemberImageInput = document.querySelector('#image');
+
 const addMemberButton = document.querySelector('#addMemberButton');
+const removeMemberButton = document.querySelector('#removeMemberButton');
 
 appendTeamCards();
 newMemberNameInput.addEventListener('input', dataCheck);
 newMemberRoleInput.addEventListener('input', dataCheck);
 newMemberImageInput.addEventListener('input', dataCheck);
+
 addMemberButton.addEventListener('click', addMember);
+removeMemberButton.addEventListener('click', removeMember);
 
 function appendTeamCards(){
     teamContainer.innerHTML = '';
@@ -79,8 +83,8 @@ function addMember(){
         const newMember = {};
     
         //assegno i valori degli input alle proprietà del nuovo oggetto
-        newMember.name = newMemberNameInput.value;
-        newMember.role = newMemberRoleInput.value;
+        newMember.name = newMemberNameInput.value.charAt(0).toUpperCase() + newMemberNameInput.value.slice(1);
+        newMember.role = newMemberRoleInput.value.charAt(0).toUpperCase() + newMemberRoleInput.value.slice(1);
         newMember.imageUrl = newMemberImageInput.value;
     
         //inserisco il nuovo oggetto in coda all'array gia esistente
@@ -130,7 +134,7 @@ function dataCheck(){
             query = 'role';
             break;
         case newMemberImageInput:
-            query = 'imgUrl';
+            query = 'imageUrl';
             break;
     }
 
@@ -148,5 +152,22 @@ function dataCheck(){
         this.classList.add('goodData');
     } else {
         this.classList.remove('error', 'goodData');
+    }
+}
+
+function removeMember(){
+    if (newMemberNameInput.value.trim() !== '' && newMemberRoleInput.value.trim() !== '' && newMemberImageInput.value.trim() !== ''){
+        const member = {};
+
+        member.name = newMemberNameInput.value;
+        member.role = newMemberRoleInput.value;
+        member.imageUrl = newMemberImageInput.value;
+    
+        for (let i = 0; i < ourTeam.length; i++){
+            if (ourTeam[i].name.toLowerCase() == newMemberNameInput.value.trim().toLowerCase() && ourTeam[i].role.toLowerCase() == newMemberRoleInput.value.trim().toLowerCase() && ourTeam[i].imageUrl.toLowerCase() == newMemberImageInput.value.trim().toLowerCase()){
+                ourTeam.splice(i, 1);
+            }
+        }
+        appendTeamCards();
     }
 }
